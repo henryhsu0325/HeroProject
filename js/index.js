@@ -82,6 +82,8 @@ class Hero extends BaseCharacter {
       this.hp = this.maxHp;
     }
     this.updateHtml(this.hpElement, this.hurtElement);
+    var _this = this;
+    _this.element.getElementsByClassName("heal-text")[0].textContent = healHp;
   }
 }
 
@@ -179,5 +181,16 @@ function addHealEvent() {
 addHealEvent();
 
 function heroHeal() {
-  hero.heal();
-}
+  document.getElementsByClassName("skill-block")[0].style.display = "none";
+  setTimeout(function() {
+    hero.heal();
+    document.getElementsByClassName("heal-text")[0].classList.add("healing");
+    setTimeout(function() {
+      document.getElementsByClassName("heal-text")[0].classList.remove("healing");
+      document.getElementsByClassName("heal-text")[0].textContent = "";
+    },500);    
+  },100);
+  setTimeout(function() {
+    document.getElementsByClassName("skill-block")[0].style.display = "block";
+  }, 600);
+};
