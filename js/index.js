@@ -75,6 +75,14 @@ class Hero extends BaseCharacter {
     super.getHurt(damage);
     this.updateHtml(this.hpElement, this.hurtElement);
   }
+  heal() {
+    var healHp = 30;
+    this.hp += healHp;
+    if (this.hp > this.maxHp) {
+      this.hp = this.maxHp;
+    }
+    this.updateHtml(this.hpElement, this.hurtElement);
+  }
 }
 
 class Monster extends BaseCharacter {
@@ -160,4 +168,16 @@ function finish() {
   } else {
     dialog.classList.add("lose");
   }
+}
+
+function addHealEvent() {
+  var heal = document.getElementById("heal");
+  heal.onclick = function () {
+    heroHeal();
+  }
+}
+addHealEvent();
+
+function heroHeal() {
+  hero.heal();
 }
